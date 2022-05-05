@@ -1,0 +1,268 @@
+/*----------Imports Here---------*/
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap'); /*logo*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz@8..144&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body{
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header{
+    display: flex;
+    background-color: whitesmoke;
+    height: 10%;
+    position: sticky;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+.cloud{
+    font-size: 32px;
+}
+.logo-text{
+    font-size: 40px;
+    font-family: 'Koulen',sans-serif;
+}
+
+
+.header-links{
+    transition: all 0.4s;
+    width: 30%;
+    display: flex;
+    font-size: 25px;
+    font-family: 'roboto flex',sans-serif;
+    justify-content: space-between;
+    margin-left: -350px;
+}
+
+.searchbar{
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+}
+.search-text{
+    font-size: 20px;
+    font-family: 'monaco';
+    border: none;
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+}
+.search{
+    transition: all 0.5s;
+    font-size: 32px;
+    cursor: pointer;
+}
+.search:hover{
+    animation: tilt-shaking 0.3s 2;
+    color: yellowgreen;
+}
+
+
+
+li{
+    list-style-type: none;
+}
+a{
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #B9E8FC;
+}
+
+.earth{
+    animation: rotateEarth 1s linear infinite;
+}
+
+.content{
+    color: whitesmoke;
+    background-color: black;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.place-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.location-wrapper{
+    font-size: 60px;
+    font-family: 'Yanone Kaffeesatz';
+    padding-top: 30px;
+    padding-left: 20px;
+}
+.temperature-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding-right: 3.5%;
+}
+.current-temperature{
+    font-size: 60px;
+    font-family: 'oswald';
+    color: tomato;
+}
+.min-max-temp{
+    display: flex;
+    font-family: 'oswald';
+    font-size: 30px;
+}
+
+.weather-wrapper{
+    margin-top: 30px;
+    display: flex;
+    padding-left: 20px;
+    width: 100%;
+    align-items: center;
+}
+.weather{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 15%;
+}
+.weather-text{
+    font-size: 70px;
+    font-family: 'Yanone Kaffeesatz';
+}
+.weather-description{
+    font-size: 50px;
+    font-family: 'Yanone Kaffeesatz';
+    border-left: 3px solid red;
+    padding-left: 3%;
+    width: 68%;
+}
+.feels-like-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.feels-like-text{
+    font-size: 50px;
+    font-family: 'Yanone Kaffeesatz';
+}
+.feels-like-temp{
+    font-size: 32px;
+    font-family: 'oswald';
+}
+
+
+
+
+
+
+
+
+/*<------------------Animation and extras------------------>*/
+
+@keyframes tilt-shaking { /*uneccasry but looks cool*/
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0eg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+  }
+@keyframes rotateEarth{
+    0% { transform: rotate(0deg);}
+    100%{ transform: rotate(360deg);}
+}
+
+textarea:focus, input:focus{ /*removes ugly blue border from the input fields*/
+    outline: none;
+}
+
+.hidden{
+    display: none;
+}
+
+
+.error-screen{
+    height: 90%;
+    display: flex;
+    font-size: 40px;
+    font-family: 'Yanone Kaffeesatz';
+    color: white;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+}
+/*<----------------------loading effect----------------------->*/
+.loading-screen{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: black;
+    height: 90%;
+}
+.loading-text{
+    font-size: 40px;
+    font-family: 'Yanone Kaffeesatz';
+    animation: loading-colors 2s linear infinite;
+    cursor: default;
+}
+.lds-ripple {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ripple div {
+    position: absolute;
+    border: 4px solid white;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    4.9% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    5% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+    }
+  }
+  @keyframes loading-colors{
+      0% { color: white;}
+      25% { color: red;}
+      50% { color: yellow;}
+      75% { color: yellowgreen;}
+      100% { color: white;}
+  }

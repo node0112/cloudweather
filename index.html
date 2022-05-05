@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer ></script>
+    <title>Cloud Weather</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <span class="material-icons cloud">cloud</span>
+            <div class="logo-text">WEATHER</div>
+        </div>
+        <ul class="header-links">
+            <li><a>API</a></li>
+            <li><a>SOURCE</a></li>
+            <li><a>REPO</a></li>
+        </ul>
+        <div class="searchbar">
+            <input class="search-text" style="text-transform: capitalize;" type="text" value="Enter a City" onclick="value=''">
+            <span class="material-icons search">search</span>
+        </div>
+    </div>
+    <div class="loading-screen" style="display: none;">
+        <div class="lds-ripple"><div></div><div></div></div>
+        <div class="loading-text">Getting Data From Server</div>
+    </div>
+    <div class="error-screen" style="display: none;">
+        <span class="material-icons" style="color: red; font-size: 60px;">close</span>
+        <div class="error-text">Please Enter A Correct City Name</div>
+    </div>
+    <div class="content">
+        <div class="place-wrapper">
+            <div class="location-wrapper">
+                <div class="city">MUMBAI,</div>
+                <div class="country">IN</div>
+            </div>
+            <div class="temperature-wrapper">
+                <div class="current-temperature">38ºC</div>
+                <div class="min-max-temp">
+                    <div class="min-temp">23ºC</div>
+                    <div style="color: brown; font-size: 30px;">/</div>
+                    <div class="max-temp">40ºC</div>
+                </div>
+            </div>
+        </div>
+        <div class="weather-wrapper">
+            <div class="weather">
+                <div class="weather-text">RAIN</div>
+                <div class="weather-logo material-icons" style="font-size:50px;">filter_drama</div>
+            </div>
+            <div class="weather-description">Light Rain</div>
+            <div class="feels-like-wrapper">
+                <div class="feels-like-text">FEELS LIKE</div>
+                <div class="feels-like-temp">39ºC</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
