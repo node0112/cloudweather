@@ -32,16 +32,27 @@ let city
 let country
 let pressure
 let humidity
+let localTime
 
 function genUrl(city){//creates link for fetching weather of the given location 
     link=defaultLink+city+"&appid=5d84b82f56eea502c9c291b6844b1530"+"&units="+units
     console.log(link)
     getWeather()
 }
+async function getTime(){
+    let time=await fetch("https://api.ipgeolocation.io/timezone?apiKey=f659a580ee0c42e0a87f44f029a74ee1&location="+city)
+    time.json().then(function(time){
+        console.log(city)
+        localTime=time.time_24
+        const timenow=new Date(localTime)
+        document.querySelector('.time').textContent=localTime
+    }).catch(err=>{
+        console.log(err)
+    })
+}
 async function getWeather(){
      let weather=await fetch(link, {mode: 'cors'})
      weather.json().then(function(weather){
-          
          currentWeather=weather.weather[0].main
          weatherDescription=weather.weather[0].description
          temperature=weather.main.temp
@@ -54,6 +65,7 @@ async function getWeather(){
          highTemp=Math.ceil(highTemp)
          country=weather.sys.country
          city=weather.name
+         getTime()
          humidity=weather.main.humidity
          pressure=weather.main.pressure
          
@@ -63,6 +75,7 @@ async function getWeather(){
          showContent()
          displayData()
      }).catch(e=>{
+        console.log(e)
         loadingScreen.style.display="none"
         document.querySelector('.error-screen').style.display=""
         let searchLogo=document.querySelector('.search')
@@ -91,12 +104,15 @@ function displayData(){//displays data received from server
     maxTempElement.textContent=highTemp+tempUnit
     checkTemp(maxTempElement,highTemp)
     document.querySelector('.feels-like-temp').textContent=feelTemp+tempUnit
-    checkTemp(document.querySelector('.feels-like-text'),feelTemp)
+    checkTemp(document.querySelector('.feels-like-temp'),feelTemp)
     //weather
     document.querySelector('.weather-text').textContent=currentWeather
     checkWeather()
     document.querySelector('.weather-description').textContent=weatherDescription
-
+    //extras
+    document.querySelector('.humidity').textContent=humidity+'%'
+    checkHumidity(document.querySelector('.humidity'))
+    document.querySelector('.pressure').textContent=pressure+" hPa"
     //update city and country
     document.querySelector('.city').textContent=city
     document.querySelector('.country').textContent=country
@@ -106,10 +122,27 @@ function checkWeather(){
     let weatherLogo=document.querySelector('.weather-logo')
     console.log(currentWeather)
     if(currentWeather=="Haze"){
-        weatherLogo.textContent="partly_cloudy_day"
+        weatherLogo.textContent="sunny"
+        weatherLogo.style.color="yellow"
     }
     else if(currentWeather=="Rain"){
         weatherLogo.textContent="thunderstorm"
+        weatherLogo.style.color="#B5EAD7"
+    }
+    else if(currentWeather=="Clouds"){
+        weatherLogo.textContent="cloudy"
+        weatherLogo.style.color="#9FC4E1f"
+    }
+}
+function checkHumidity(element){
+    if(humidity<40){
+        element.style.color="tomato"
+    }
+    else if(humidity>=40 && humidity<70){
+        element.style.color="yellow"
+    }
+    else if(humidity>=70){
+        element.style.color="#B5EAD7"
     }
 }
 function checkTemp(element,temperature){

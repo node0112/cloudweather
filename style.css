@@ -156,8 +156,37 @@ a:hover{
     font-size: 32px;
     font-family: 'oswald';
 }
-
-
+.extra-info-wrapper{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 8%;
+}
+.humidity-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.humidity-text,.pressure-text{
+    font-size: 50px;
+    font-family: 'Yanone Kaffeesatz';
+}
+.humidity,.pressure,.time{
+    font-size: 50px;
+    font-family: 'Oswald';
+}
+.pressure-text{
+    display: flex;
+    align-items: baseline;
+}
+.pressure-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
