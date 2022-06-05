@@ -12,6 +12,7 @@ function search(){
     document.querySelector('.error-screen').style.display="none"
     searchLogo.classList.add('earth')
     searchLogo.textContent="public"
+    document.querySelector('.time').textContent="Getting Time" //serves as loading info
     genUrl(searchTerm)
 }
 
@@ -43,12 +44,13 @@ function genUrl(city){//creates link for fetching weather of the given location
 async function getTime(){
     let time=await fetch("https://api.ipgeolocation.io/timezone?apiKey=f659a580ee0c42e0a87f44f029a74ee1&location="+city)
     time.json().then(function(time){
-        localTime=time.time_24
-        const timenow=new Date(localTime)
-        document.querySelector('.time').textContent=localTime
-        setTimeout(() => {
+        localTime=new Date(time.date_time_txt)
+        let x=1
+        let timenow=localTime.getHours()+":"+localTime.getMinutes()
+        document.querySelector('.time').textContent=timenow
+        setInterval(() => {
             getTime()
-        }, 500);
+        }, 36000)
     }).catch(err=>{
         console.log(err)
     })
