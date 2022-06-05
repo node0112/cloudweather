@@ -3,7 +3,8 @@ const searchBtn=document.querySelector('.search')
 const content=document.querySelector('.content')
 const loadingScreen=document.querySelector('.loading-screen')
 
-searchBtn.addEventListener("click",()=>{
+searchBtn.addEventListener("click", search)
+function search(){
     content.classList.add('hidden')
     loadingScreen.style.display=""
     let searchTerm=searchField.value
@@ -12,7 +13,7 @@ searchBtn.addEventListener("click",()=>{
     searchLogo.classList.add('earth')
     searchLogo.textContent="public"
     genUrl(searchTerm)
-})
+}
 
 //<-----------------main functions here------------------->
 
@@ -34,18 +35,20 @@ let pressure
 let humidity
 let localTime
 
+
 function genUrl(city){//creates link for fetching weather of the given location 
     link=defaultLink+city+"&appid=5d84b82f56eea502c9c291b6844b1530"+"&units="+units
-    console.log(link)
     getWeather()
 }
 async function getTime(){
     let time=await fetch("https://api.ipgeolocation.io/timezone?apiKey=f659a580ee0c42e0a87f44f029a74ee1&location="+city)
     time.json().then(function(time){
-        console.log(city)
         localTime=time.time_24
         const timenow=new Date(localTime)
         document.querySelector('.time').textContent=localTime
+        setTimeout(() => {
+            getTime()
+        }, 500);
     }).catch(err=>{
         console.log(err)
     })
@@ -120,7 +123,6 @@ function displayData(){//displays data received from server
 
 function checkWeather(){
     let weatherLogo=document.querySelector('.weather-logo')
-    console.log(currentWeather)
     if(currentWeather=="Haze"){
         weatherLogo.textContent="sunny"
         weatherLogo.style.color="yellow"
@@ -159,4 +161,12 @@ function checkTemp(element,temperature){
         element.style.color="tomato"
     }
 }
+
+document.addEventListener('keydown', (event) => {
+    let key = event.key;
+    if(key == "Enter" && searchField== document.activeElement){
+        search()
+    }
+  })
+
 genUrl('seattle')
